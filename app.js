@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const helmet = require('helmet')
 
 const index = require('./routes/index')
+const license = require('./routes/license')
 
 const app = express()
 
@@ -12,6 +13,7 @@ app.use(logger('dev'))
 app.use(cookieParser())
 
 app.use('/', index)
+app.use('/license', license)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
