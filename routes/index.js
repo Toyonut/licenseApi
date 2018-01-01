@@ -11,7 +11,7 @@ router.get('/', urlEncodedParser, (req, res, next) => {
   const userName = req.query.username
   console.dir(userName)
 
-  res.json({welcome: userName}).status(200)
+  res.status(200).json({welcome: userName})
 })
 
 module.exports = router
