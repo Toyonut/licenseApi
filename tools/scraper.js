@@ -2,6 +2,17 @@
 
 const osmosis = require('osmosis')
 const pgp = require('pg-promise')()
+const PQ = require('pg-promise').ParameterizedQuery
+
+const config = {
+  host: 'localhost',
+  port: 5432,
+  database: 'licensedata',
+  user: 'nodeuser',
+  password: 'password'
+}
+
+const db = pgp(config)
 
 const urls = [
   'https://choosealicense.com/licenses/mit/',
@@ -31,21 +42,20 @@ urls.forEach(url => {
 
     let dataArray = [page.licenseName, page.licenseText, page.url]
 
-    insertOneRecord(dataArray)
+    insertOneRecordAsync(dataArray)
   })
   .log(console.log)
-  .error(console.log)
+  .error(console.error)
   .debug(console.log)
 })
 
-const insertOneRecord = (licenseData) => {
-  const db = pgp('postgres://nodeuser:password@localhost:5432/licensedata')
+async function insertOneRecordAsync (licenseData) {
+  const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url) VALUES($1, $2, $3) RETURNING id', licenseData)
 
-  db.one('INSERT INTO license_info(license_name, license_text, license_url) VALUES($1, $2, $3) RETURNING id', licenseData)
-  .then(data => {
-    console.log(data.id) // print new user id;
-  })
-  .catch(error => {
-    console.log('ERROR:', error) // print error;
-  })
+  try {
+    let result = await db.one(insertStatement)
+    console.log(`ID of inserted record: ${result.id}`)
+  } catch (err) {
+    console.error(`ERROR: ${err}`)
+  }
 }
