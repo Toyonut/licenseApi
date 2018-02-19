@@ -33,14 +33,10 @@ urls.forEach(url => {
   })
   .data((page) => {
     page.url = url
+    page.licenseShortName = getShortName(url)
     console.dir(page)
 
-    console.log(`License name is ${page.licenseName}.
-    License text is ${page.licenseText}.
-    License url is ${page.url}.
-    Inserting into Database.`)
-
-    let dataArray = [page.licenseName, page.licenseText, page.url]
+    let dataArray = Object.values(page)
 
     insertOneRecordAsync(dataArray)
   })
@@ -50,7 +46,7 @@ urls.forEach(url => {
 })
 
 async function insertOneRecordAsync (licenseData) {
-  const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url) VALUES($1, $2, $3) RETURNING id', licenseData)
+  const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url, license_short_name) VALUES($1, $2, $3, $4) RETURNING id', licenseData)
 
   try {
     let result = await db.one(insertStatement)
@@ -58,4 +54,15 @@ async function insertOneRecordAsync (licenseData) {
   } catch (err) {
     console.error(`ERROR: ${err}`)
   }
+}
+
+const getShortName = (licenseUrl) => {
+  let url = licenseUrl.toLowerCase()
+  let urlSegments = url.split('/')
+
+  let licencesIndex = urlSegments.indexOf('licenses')
+  let licenseNameIndex = licencesIndex + 1
+
+  let licenseShortName = urlSegments[licenseNameIndex]
+  return licenseShortName
 }
