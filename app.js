@@ -2,7 +2,6 @@
 
 const express = require('express')
 const logger = require('morgan')
-const cookieParser = require('cookie-parser')
 const helmet = require('helmet')
 
 const index = require('./routes/index')
@@ -12,7 +11,6 @@ const app = express()
 
 app.use(helmet())
 app.use(logger('dev'))
-app.use(cookieParser())
 
 app.use('/', index)
 app.use('/license', license)
