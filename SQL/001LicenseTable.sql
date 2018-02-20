@@ -26,3 +26,6 @@ CREATE TABLE If NOT EXISTS license_info (
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO nodeuser;
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO nodeuser;
+
+ALTER TABLE license_info
+ADD COLUMN license_short_name varchar(40);
