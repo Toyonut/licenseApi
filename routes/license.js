@@ -2,34 +2,14 @@
 
 const express = require('express')
 const router = express.Router()
-const pgp = require('pg-promise')()
-const PQ = require('pg-promise').ParameterizedQuery
-
-const config = {
-  host: 'localhost',
-  port: 5432,
-  database: 'licensedata',
-  user: 'nodeuser',
-  password: 'password'
-}
-
-const db = pgp(config)
+const licenseData = require('../data')
 
 router.get('/:licenseName/', (req, res, next) => {
   const licenseName = req.params.licenseName
 
   if (licenseName) {
     (async () => {
-      let licenseRows = await getLicenseTable()
-
-      let allLicenseNames = []
-
-      for (let i = 0; i < licenseRows.length; i++) {
-        let shortName = licenseRows[i].license_short_name
-        allLicenseNames.push(shortName.toLowerCase())
-      }
-
-      console.log(allLicenseNames)
+      let allLicenseNames = await getAllLicenses()
 
       if (allLicenseNames.includes(licenseName.toLowerCase())) {
         res.status(200).json({
@@ -46,16 +26,18 @@ router.get('/:licenseName/', (req, res, next) => {
   }
 })
 
-module.exports = router
+async function getAllLicenses () {
+  let licenseRows = await licenseData.getLicenseTable()
 
-async function getLicenseTable () {
-  const statement = new PQ({
-    text: 'select * from license_info'
-  })
-  try {
-    let result = await db.query(statement)
-    return result
-  } catch (err) {
-    console.error(`ERROR: ${err}`)
+  let allLicenseNames = []
+
+  for (let i = 0; i < licenseRows.length; i++) {
+    let shortName = licenseRows[i].license_short_name
+    allLicenseNames.push(shortName.toLowerCase())
   }
+
+  console.log(allLicenseNames)
+  return allLicenseNames
 }
+
+module.exports = router

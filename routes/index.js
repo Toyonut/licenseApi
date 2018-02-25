@@ -2,18 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
-const pgp = require('pg-promise')()
-const PQ = require('pg-promise').ParameterizedQuery
-
-const config = {
-  host: 'localhost',
-  port: 5432,
-  database: 'licensedata',
-  user: 'nodeuser',
-  password: 'password'
-}
-
-const db = pgp(config)
+const licenseData = require('../data')
 
 router.get('/', (req, res, next) => {
   (async () => {
@@ -30,7 +19,7 @@ function buildUrl (req, shortName) {
 }
 
 async function getLicenses (req) {
-  let result = await getLicensesDbCall()
+  let result = await licenseData.getLicenses()
   let licenses = []
 
   for (let i = 0; i < result.length; i++) {
@@ -45,16 +34,4 @@ async function getLicenses (req) {
     licenses.push(details)
   }
   return licenses
-}
-
-async function getLicensesDbCall () {
-  const statement = new PQ({
-    text: 'select license_name, license_short_name from license_info'
-  })
-  try {
-    let result = await db.query(statement)
-    return result
-  } catch (err) {
-    console.error(`ERROR: ${err}`)
-  }
 }
