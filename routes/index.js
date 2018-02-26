@@ -25,10 +25,12 @@ async function getLicenses (req) {
   for (let i = 0; i < result.length; i++) {
     let details = {
       name: '',
+      shortName: '',
       url: ''
     }
 
     details.name = result[i].license_name
+    details.shortName = result[i].license_short_name
     details.url = buildUrl(req, result[i].license_short_name)
 
     licenses.push(details)
