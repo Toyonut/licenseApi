@@ -11,9 +11,6 @@ router.get('/:licenseShortName/', (req, res, next) => {
     (async () => {
       let licenseInfo = await licenseData.getLicenseAsync(licenseShortName)
 
-      console.dir(licenseInfo[0])
-      console.dir(licenseInfo.length)
-
       if (licenseInfo.length === 0) {
         res.status(404).json({
           error: 'not found'
