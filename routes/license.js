@@ -4,40 +4,27 @@ const express = require('express')
 const router = express.Router()
 const licenseData = require('../data')
 
-router.get('/:licenseName/', (req, res, next) => {
-  const licenseName = req.params.licenseName
+router.get('/:licenseShortName/', (req, res, next) => {
+  const licenseShortName = req.params.licenseShortName
 
-  if (licenseName) {
+  if (licenseShortName) {
     (async () => {
-      let allLicenseNames = await getAllLicenses()
+      let licenseInfo = await licenseData.getLicenseAsync(licenseShortName)
 
-      if (allLicenseNames.includes(licenseName.toLowerCase())) {
-        res.status(200).json({
-          name: licenseName
-        })
-      } else {
+      console.dir(licenseInfo[0])
+      console.dir(licenseInfo.length)
+
+      if (licenseInfo.length === 0) {
         res.status(404).json({
           error: 'not found'
         })
+      } else {
+        res.status(200).json(licenseInfo[0])
       }
     })()
   } else {
     res.status(400)
   }
 })
-
-async function getAllLicenses () {
-  let licenseRows = await licenseData.getLicenseTable()
-
-  let allLicenseNames = []
-
-  for (let i = 0; i < licenseRows.length; i++) {
-    let shortName = licenseRows[i].license_short_name
-    allLicenseNames.push(shortName.toLowerCase())
-  }
-
-  console.log(allLicenseNames)
-  return allLicenseNames
-}
 
 module.exports = router

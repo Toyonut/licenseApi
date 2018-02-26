@@ -19,7 +19,7 @@ function buildUrl (req, shortName) {
 }
 
 async function getLicenses (req) {
-  let result = await licenseData.getLicenses()
+  let result = await licenseData.getLicenseInfoAsync()
   let licenses = []
 
   for (let i = 0; i < result.length; i++) {
