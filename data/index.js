@@ -1,14 +1,7 @@
 'use strict'
 const LicenseMethods = require('./dataAccess')
 const pgp = require('pg-promise')()
-
-const config = {
-  host: 'localhost',
-  port: 5432,
-  database: 'licensedata',
-  user: 'nodeuser',
-  password: 'password'
-}
+const config = require('../config/dbConfig.json')
 
 const db = pgp(config)
 
