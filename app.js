@@ -3,6 +3,7 @@
 const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
+const licenseData = require('./data')
 
 const index = require('./routes/index')
 const license = require('./routes/license')
@@ -10,7 +11,19 @@ const license = require('./routes/license')
 const app = express()
 
 app.use(helmet())
-app.use(logger('dev'))
+app.use(logger('dev'));
+
+(async () => {
+  try {
+    const obj = await licenseData.getConnectionAsync()
+    if (obj) {
+      console.log(`DB connected.`)
+      obj.done()
+    }
+  } catch (error) {
+    console.error(`Error Messsage: ${error}`)
+  }
+})()
 
 app.use('/', index)
 app.use('/license', license)

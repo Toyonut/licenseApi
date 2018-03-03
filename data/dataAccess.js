@@ -6,20 +6,13 @@ class Licenses {
     this.db = db
   }
 
+  getConnectionAsync () {
+    return this.db.connect()
+  }
+
   getLicenseInfoAsync () {
     const statement = new PQ({
       text: 'select license_name, license_short_name from license_info'
-    })
-    try {
-      return this.db.query(statement)
-    } catch (err) {
-      console.error(`ERROR: ${err}`)
-    }
-  }
-
-  getLicenseTableAsync () {
-    const statement = new PQ({
-      text: 'select * from license_info'
     })
     try {
       return this.db.query(statement)
