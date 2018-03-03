@@ -1,0 +1,14 @@
+# exclude dot files
+.editorconfig
+.gitignore
+.dockerfile
+
+# exclude md files
+LICENSE
+README.MD
+
+# exclude directories
+tools
+SQL
+node_modules
+.vscode
