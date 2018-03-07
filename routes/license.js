@@ -2,7 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
-const licenseData = require('../data')
+const licenseData = require('../src/data')
 
 router.get('/:licenseShortName/', (req, res, next) => {
   const licenseShortName = req.params.licenseShortName

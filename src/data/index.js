@@ -16,7 +16,7 @@ const initOptions = {
 
 const LicenseMethods = require('./dataAccess')
 const pgp = require('pg-promise')(initOptions)
-const config = require('../config/dbConfig.json')
+const config = require('../../config/dbConfig.json')
 
 const db = pgp(config)
 
