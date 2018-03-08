@@ -54,7 +54,6 @@ urls.forEach(url => {
   .data((page) => {
     page.url = url
     page.licenseShortName = getShortName(url)
-    console.dir(page)
 
     let dataArray = Object.values(page)
 
