@@ -3,7 +3,7 @@
 const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
-const licenseData = require('./src/data')
+const { checkDbConnection } = require('./src/utils')
 
 const index = require('./routes/index')
 const license = require('./routes/license')
@@ -37,15 +37,3 @@ app.use((err, req, res, next) => {
 })
 
 module.exports = app
-
-async function checkDbConnection () {
-  try {
-    const obj = await licenseData.getConnectionAsync()
-    if (obj) {
-      console.log(`DB connected.`)
-      obj.done()
-    }
-  } catch (error) {
-    console.error(`Error Messsage: ${error}`)
-  }
-}
