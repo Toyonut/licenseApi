@@ -1,3 +1,5 @@
+'use strict'
+
 const licenseData = require('../src/data')
 
 async function checkDbConnection () {
