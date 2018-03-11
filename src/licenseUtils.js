@@ -36,7 +36,35 @@ async function getLicenses (req) {
   return licenses
 }
 
+function placeholderReplace ({userName, email, licenseInfo}) {
+  const thisYear = new Date().getFullYear()
+  const dateRegex = new RegExp('\\[year\\]|\\[yyyy\\]', 'ig')
+  const userRegex = new RegExp('\\[fullname\\]|\\[name of copyright owner\\]', 'ig')
+  const emailRegex = new RegExp('\\[email\\]', 'ig')
+
+  let licenseText = licenseInfo.license_text
+  const dateMatch = licenseText.match(dateRegex)
+  const userMatch = licenseText.match(userRegex)
+  const emailMatch = licenseText.match(emailRegex)
+
+  if (dateMatch) {
+    licenseText = licenseText.replace(dateRegex, thisYear)
+  }
+
+  if (userMatch && userName) {
+    licenseText = licenseText.replace(userRegex, userName)
+  }
+
+  if (emailMatch && email) {
+    licenseText = licenseText.replace(emailRegex, email)
+  }
+
+  licenseInfo.license_text = licenseText
+  return licenseInfo
+}
+
 module.exports = {
   checkDbConnection,
-  getLicenses
+  getLicenses,
+  placeholderReplace
 }

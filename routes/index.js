@@ -2,7 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
-const { getLicenses } = require('../src/utils')
+const { getLicenses } = require('../src/licenseUtils')
 
 router.get('/', (req, res, next) => {
   (async () => {

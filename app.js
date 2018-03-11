@@ -3,7 +3,7 @@
 const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
-const { checkDbConnection } = require('./src/utils')
+const { checkDbConnection } = require('./src/licenseUtils')
 
 const index = require('./routes/index')
 const license = require('./routes/license')
