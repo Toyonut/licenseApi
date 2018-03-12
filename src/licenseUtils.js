@@ -38,7 +38,7 @@ async function getLicenses (req) {
   return licenses
 }
 
-function placeholderReplace ({userName, email, licenseInfo}) {
+function placeholderReplace ({name, email, licenseInfo}) {
   const thisYear = new Date().getFullYear()
   const dateRegex = new RegExp('\\[year\\]|\\[yyyy\\]', 'ig')
   const userRegex = new RegExp('\\[fullname\\]|\\[name of copyright owner\\]', 'ig')
@@ -53,8 +53,8 @@ function placeholderReplace ({userName, email, licenseInfo}) {
     licenseText = licenseText.replace(dateRegex, thisYear)
   }
 
-  if (userMatch && userName) {
-    licenseText = licenseText.replace(userRegex, userName)
+  if (userMatch && name) {
+    licenseText = licenseText.replace(userRegex, name)
   }
 
   if (emailMatch && email) {
