@@ -7,6 +7,7 @@ const { checkDbConnection } = require('./src/licenseUtils')
 
 const index = require('./routes/index')
 const license = require('./routes/license')
+const wimip = require('./routes/wimip')
 
 const app = express()
 
@@ -17,6 +18,7 @@ checkDbConnection()
 
 app.use('/', index)
 app.use('/license', license)
+app.use('/wimip', wimip)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
