@@ -7,7 +7,7 @@ const {placeholderReplace} = require('../src/licenseUtils')
 const joi = require('joi')
 
 const schema = joi.object().keys({
-  licenseShortName: joi.string().min(3).max(18).required(),
+  licenseShortName: joi.string().min(licenseData.idMin).max(licenseData.idMax).required(),
   name: joi.string().min(1).max(30),
   email: joi.string().email()
 })

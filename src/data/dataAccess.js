@@ -2,8 +2,10 @@
 const PQ = require('pg-promise').ParameterizedQuery
 
 class Licenses {
-  constructor (db) {
+  constructor (db, shortIdMin, shortIdMax) {
     this.db = db
+    this.idMin = shortIdMin
+    this.idMax = shortIdMax
   }
 
   getConnectionAsync () {

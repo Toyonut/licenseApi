@@ -3,5 +3,11 @@
   "port": 5432,
   "database": "licensedata",
   "user": "nodeuser",
-  "password": "password"
+  "password": "password",
+  "shortnames": {
+    "length": {
+      "min": 3,
+      "max": 18
+    }
+  }
 }
