@@ -1,6 +1,6 @@
 'use strict'
 
-const licenseData = require('../src/data')
+const licenseData = require('./data')
 
 async function checkDbConnection () {
   try {
@@ -38,6 +38,22 @@ async function getLicenses (req) {
   return licenses
 }
 
+async function getMinMaxShortName() {
+  try {
+    let length = await licenseData.getMinMaxShortNameAsync()
+
+    let nameLengths =  {
+      'min': length[0].min,
+      'max': length[0].max
+    }
+
+    return nameLengths
+  } catch (err) {
+    console.error(`${err}`)
+  }
+
+}
+
 function placeholderReplace ({name, email, licenseInfo}) {
   const thisYear = new Date().getFullYear()
   const dateRegex = new RegExp('\\[year\\]|\\[yyyy\\]', 'ig')
@@ -68,5 +84,6 @@ function placeholderReplace ({name, email, licenseInfo}) {
 module.exports = {
   checkDbConnection,
   getLicenses,
-  placeholderReplace
+  placeholderReplace,
+  getMinMaxShortName
 }

@@ -3,36 +3,38 @@
 const express = require('express')
 const router = express.Router()
 const licenseData = require('../src/data')
-const {placeholderReplace} = require('../src/licenseUtils')
+const {placeholderReplace, getMinMaxShortName} = require('../src/licenseUtils')
 const joi = require('joi')
 
-const schema = joi.object().keys({
-  licenseShortName: joi.string().min(licenseData.idMin).max(licenseData.idMax).required(),
-  name: joi.string().min(1).max(30),
-  email: joi.string().email()
-})
-
 router.get('/:licenseShortName/', (req, res, next) => {
-  // build requestParams object
-  let requestParams = {}
+  (async () => {
+    // build requestParams object
+    let requestParams = {}
 
-  if (req.query.name) {
-    requestParams.name = req.query.name
-  }
+    if (req.query.name) {
+      requestParams.name = req.query.name
+    }
 
-  if (req.query.email) {
-    requestParams.email = req.query.email
-  }
+    if (req.query.email) {
+      requestParams.email = req.query.email
+    }
 
-  if (req.params.licenseShortName) {
-    requestParams.licenseShortName = req.params.licenseShortName
-  }
+    if (req.params.licenseShortName) {
+      requestParams.licenseShortName = req.params.licenseShortName
+    }
 
-  // validate the user parameters
-  const result = joi.validate(requestParams, schema)
+    let nameLength = await getMinMaxShortName()
 
-  if (result.error === null) {
-    (async () => {
+    const schema = joi.object().keys({
+      licenseShortName: joi.string().min(nameLength.min).max(nameLength.max).required(),
+      name: joi.string().min(1).max(30),
+      email: joi.string().email()
+    })
+
+    // validate the user parameters
+    const result = joi.validate(requestParams, schema)
+
+    if (result.error === null) {
       let licenseInfo = await licenseData.getLicenseAsync(requestParams.licenseShortName)
 
       if (licenseInfo.length === 0) {
@@ -43,12 +45,12 @@ router.get('/:licenseShortName/', (req, res, next) => {
         requestParams.licenseInfo = licenseInfo[0]
         res.status(200).json(placeholderReplace(requestParams))
       }
-    })()
-  } else {
-    let err = result.error
-    err.status = 400
-    next(err)
-  }
+    } else {
+      let err = result.error
+      err.status = 400
+      next(err)
+    }
+  })()
 })
 
 module.exports = router

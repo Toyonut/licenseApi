@@ -2,10 +2,8 @@
 const PQ = require('pg-promise').ParameterizedQuery
 
 class Licenses {
-  constructor (db, shortIdMin, shortIdMax) {
+  constructor (db) {
     this.db = db
-    this.idMin = shortIdMin
-    this.idMax = shortIdMax
   }
 
   getConnectionAsync () {
@@ -15,6 +13,17 @@ class Licenses {
   getLicenseInfoAsync () {
     const statement = new PQ({
       text: 'select license_name, license_short_name from license_info'
+    })
+    try {
+      return this.db.query(statement)
+    } catch (err) {
+      console.error(`ERROR: ${err}`)
+    }
+  }
+
+  getMinMaxShortNameAsync () {
+    const statement = new PQ({
+      text: 'select max(length(license_short_name)), min(length(license_short_name)) from license_info'
     })
     try {
       return this.db.query(statement)

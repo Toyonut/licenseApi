@@ -20,6 +20,6 @@ const config = require('../../config/dbConfig.json')
 
 const db = pgp(config)
 
-const Licenses = new LicenseMethods(db, config.shortnames.length.min, config.shortnames.length.max)
+const Licenses = new LicenseMethods(db)
 
 module.exports = Licenses
