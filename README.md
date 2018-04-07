@@ -30,11 +30,19 @@ The idea is that there could be simple command line apps to make a fetch a licen
 
 ## How could it be used by users?
 
-1. ``` bash
+* Bash and Python:
+
+  ``` bash
   curl -s 'http://localhost:3000/license/apache-2.0' | \
-  python3 -c "import sys, json; print(json.load(sys.stdin)['license_text'])" > apache2.md ```
-2. ``` powershell
+  python3 -c "import sys, json; print(json.load(sys.stdin)['license_text'])" > apache2.md
+  ```
+
+* Powershell:
+
+  ``` powershell
   invoke-restmethod -uri 'http://localhost:3000/license/apache-2.0' |
   select-object -expandproperty license_text |
-  out-file apache2.md ```
-3. Integrated with tooling. For example, `NPM init` could pull down the relevent license during the init process.
+  out-file apache2.md
+  ```
+
+* Integrated with tooling. For example, `NPM init` could pull down the relevent license during the init process.
