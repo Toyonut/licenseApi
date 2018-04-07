@@ -12,3 +12,4 @@ tools
 SQL
 node_modules
 .vscode
+.idea
