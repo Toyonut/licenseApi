@@ -34,7 +34,7 @@ The idea is that there could be simple command line apps to make a fetch a licen
 
   ``` bash
   curl -s 'http://localhost:3000/license/apache-2.0' | \
-  python3 -c "import sys, json; print(json.load(sys.stdin)['license_text'])" > apache2.md
+  python3 -c "import sys, json; print(json.load(sys.stdin)['license_text'])" > LICENSE.md
   ```
 
 * Powershell:
@@ -42,7 +42,7 @@ The idea is that there could be simple command line apps to make a fetch a licen
   ``` powershell
   invoke-restmethod -uri 'http://localhost:3000/license/apache-2.0' |
   select-object -expandproperty license_text |
-  out-file apache2.md
+  out-file LICENSE.md
   ```
 
 * Integrated with tooling. For example, `NPM init` could pull down the relevent license during the init process.
