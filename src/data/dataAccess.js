@@ -10,7 +10,7 @@ class Licenses {
     return this.db.connect()
   }
 
-  getLicenseInfoAsync () {
+  getLicensesAsync () {
     const statement = new PQ({
       text: 'select license_name, license_short_name from license_info'
     })
