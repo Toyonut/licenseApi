@@ -38,11 +38,11 @@ async function getLicenses (req) {
   return licenses
 }
 
-async function getMinMaxShortName() {
+async function getMinMaxShortName () {
   try {
     let length = await licenseData.getMinMaxShortNameAsync()
 
-    let nameLengths =  {
+    let nameLengths = {
       'min': length[0].min,
       'max': length[0].max
     }
@@ -51,7 +51,6 @@ async function getMinMaxShortName() {
   } catch (err) {
     console.error(`${err}`)
   }
-
 }
 
 function placeholderReplace ({name, email, licenseInfo}) {
