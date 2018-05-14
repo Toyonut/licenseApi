@@ -1,4 +1,4 @@
-drop user if exists nosdeuser;
+drop user if exists nodeuser;
 
 CREATE USER nodeuser
   WITH
