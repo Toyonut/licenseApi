@@ -39,7 +39,7 @@ async function invokeWebRequest (opts) {
     let webReq = await rp(opts)
     return webReq
   } catch (error) {
-    console.error(error)
+    console.error(`error fetching web content:\n${error}`)
   }
 }
 

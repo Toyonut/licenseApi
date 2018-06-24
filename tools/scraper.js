@@ -28,7 +28,7 @@ const db = pgp(config);
       insertOneRecordAsync(fields)
     })
   } catch (error) {
-    console.error(`error fetching web content: /n ${error}`)
+    console.error(`error fetching web content:\n${error}`)
   }
 })()
 
@@ -44,7 +44,7 @@ async function GetWwebContent (url) {
     let webReq = await rp(options)
     return webReq
   } catch (error) {
-    console.error(`error fetching web content: /n ${error}`)
+    console.error(`error fetching web content:\n${error}`)
   }
 }
 
@@ -56,7 +56,7 @@ async function insertOneRecordAsync (licenseData) {
     let result = await db.one(insertStatement)
     console.log(`ID of inserted record: ${result.id}`)
   } catch (error) {
-    console.error(`error inserting into DB: /n ${error}`)
+    console.error(`error inserting into DB:\n${error}`)
   }
 }
 
