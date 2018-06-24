@@ -78,7 +78,8 @@ async function invokeWebRequest (opts) {
 }
 
 async function insertOneRecordAsync (licenseData) {
-  const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url, license_short_name) VALUES($1, $2, $3, $4) RETURNING id', licenseData)
+  const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url, license_short_name) VALUES($1, $2, $3, $4) RETURNING id',
+    [licenseData.licenseName, licenseData.licenseText, licenseData.url, licenseData.licenseShortName])
 
   try {
     let result = await db.one(insertStatement)
