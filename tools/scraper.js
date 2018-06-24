@@ -1,6 +1,7 @@
 'use strict'
 
-const osmosis = require('osmosis')
+const rp = require('request-promise')
+const cheerio = require('cheerio')
 const pgp = require('pg-promise')()
 const PQ = require('pg-promise').ParameterizedQuery
 
@@ -40,29 +41,41 @@ const urls = [
   'https://choosealicense.com/licenses/osl-3.0',
   'https://choosealicense.com/licenses/postgresql',
   'https://choosealicense.com/licenses/unlicense',
+  'https://choosealicense.com/licenses/upl-1.0',
   'https://choosealicense.com/licenses/wtfpl',
   'https://choosealicense.com/licenses/zlib'
 ]
 
 urls.forEach(url => {
-  osmosis
-  .get(url)
-  .set({
-    'licenseName': 'h1',
-    'licenseText': '#license-text'
-  })
-  .data((page) => {
-    page.url = url
-    page.licenseShortName = getShortName(url)
+  const options = {
+    uri: url,
+    transform: body => {
+      return cheerio.load(body)
+    }
+  };
 
-    let dataArray = Object.values(page)
+  (async () => {
+    let webContent = await invokeWebRequest(options)
 
-    insertOneRecordAsync(dataArray)
-  })
-  .log(console.log)
-  .error(console.error)
-  .debug(console.log)
+    let fields = {
+      'licenseName': webContent('h1').text(),
+      'licenseText': webContent('#license-text').text(),
+      'url': url,
+      'licenseShortName': getShortName(url)
+    }
+    console.log(fields)
+    insertOneRecordAsync(fields)
+  })()
 })
+
+async function invokeWebRequest (opts) {
+  try {
+    let webReq = await rp(opts)
+    return webReq
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 async function insertOneRecordAsync (licenseData) {
   const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url, license_short_name) VALUES($1, $2, $3, $4) RETURNING id', licenseData)
