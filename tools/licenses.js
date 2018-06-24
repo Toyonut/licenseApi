@@ -1,29 +1,43 @@
 'use strict'
 
-const osmosis = require('osmosis')
+const rp = require('request-promise')
+const cheerio = require('cheerio')
 
 const url = 'https://choosealicense.com/appendix/'
 
-osmosis
-.get(url)
-.set({
-  'licenseRef': ['a @href']
-})
-.data((data) => {
-  const urlArray = []
+const options = {
+  uri: url,
+  transform: body => {
+    return cheerio.load(body)
+  }
+};
 
-  data.licenseRef.map(val => {
-    const regex = new RegExp('/licenses/.*')
-    const match = val.match(regex)
+(async () => {
+  let webContent = await invokeWebRequest(options)
+
+  let links = []
+
+  const regex = new RegExp('/licenses/.*')
+
+  webContent('tbody>tr>th>a[href]').each((index, value) => {
+    let link = webContent(value).attr('href')
+
+    const match = link.match(regex)
 
     if (match) {
       let licenseUrl = `https://choosealicense.com${match}`
-      console.log(licenseUrl)
-      urlArray.push(licenseUrl)
+      links.push(licenseUrl)
     }
   })
-  console.log(urlArray)
-})
-.log(console.log)
-.error(console.error)
-.debug(console.log)
+
+  console.log(links)
+})()
+
+async function invokeWebRequest (opts) {
+  try {
+    let webReq = await rp(opts)
+    return webReq
+  } catch (error) {
+    console.error(error)
+  }
+}
