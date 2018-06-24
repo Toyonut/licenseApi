@@ -10,16 +10,16 @@ const options = {
   transform: body => {
     return cheerio.load(body)
   }
-};
+}
 
-(async () => {
+async function GetLicenses () {
   let webContent = await invokeWebRequest(options)
 
   let links = []
 
   const regex = new RegExp('/licenses/.*')
 
-  webContent('tbody>tr>th>a[href]').each((index, value) => {
+  webContent('tbody>tr>th>a[href]').each((i, value) => {
     let link = webContent(value).attr('href')
 
     const match = link.match(regex)
@@ -31,7 +31,8 @@ const options = {
   })
 
   console.log(links)
-})()
+  return links
+}
 
 async function invokeWebRequest (opts) {
   try {
@@ -41,3 +42,5 @@ async function invokeWebRequest (opts) {
     console.error(error)
   }
 }
+
+module.exports = GetLicenses
