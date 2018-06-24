@@ -9,12 +9,12 @@ const index = require('./routes/index')
 const license = require('./routes/license')
 const wimip = require('./routes/wimip')
 
+checkDbConnection()
+
 const app = express()
 
 app.use(helmet())
 app.use(logger('dev'))
-
-checkDbConnection()
 
 app.use('/', index)
 app.use('/license', license)
