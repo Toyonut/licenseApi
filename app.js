@@ -16,8 +16,8 @@ const app = express()
 app.use(helmet())
 app.use(logger('dev'))
 
-app.use('/', index)
-app.use('/license', license)
+app.use('/license', index)
+app.use('/license/get', license)
 app.use('/wimip', wimip)
 
 // catch 404 and forward to error handler
