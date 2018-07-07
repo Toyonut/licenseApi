@@ -1,0 +1,37 @@
+html, body {
+  padding-right: 10%;
+  padding-left: 10%;
+  color: darkslategray;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#heading {
+  padding-left: 20%;
+  padding-right: 20%;
+  background-color: whitesmoke;
+}
+
+#content {
+  padding-left: 20%;
+  padding-right: 20%;
+  background-color: whitesmoke;
+  flex: 1 0 auto;
+}
+
+#footer{
+  padding-left: 20%;
+  padding-right: 20%;
+  background-color: whitesmoke;
+  flex-shrink: 0;
+ }
+
+a {
+  color: #00B7FF;
+}
+
