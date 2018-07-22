@@ -1,3 +1,8 @@
+const Apis = {
+  license: 'http://localhost:3000/license',
+  getLicense: 'http://localhost:3000/license/get'
+}
+
 function MakeList (lineItems) {
   const content = document.querySelector('#content')
   let list = document.createElement('ol')
@@ -11,6 +16,17 @@ function MakeList (lineItems) {
   content.appendChild(list)
 }
 
+function FillMenu (lineItems) {
+  const licenseMenu = document.querySelector('#license_selector')
+
+  lineItems.forEach(lineItem => {
+    let option = document.createElement('option')
+    option.value = `${lineItem.shortName}`
+    option.innerText = `${lineItem.name}`
+    licenseMenu.appendChild(option)
+  })
+}
+
 function DisplayList (url) {
   var myFetch = window.fetch(url)
 
@@ -20,15 +36,11 @@ function DisplayList (url) {
     })
     .then((json) => {
       MakeList(json)
+      FillMenu(json)
     })
     .catch((err) => {
       console.error(err)
     })
-}
-
-const Apis = {
-  license: 'http://localhost:3000/license',
-  getLicense: 'http://localhost:3000/license/get'
 }
 
 window.onload = function () {
