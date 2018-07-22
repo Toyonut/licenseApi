@@ -1,9 +1,9 @@
 html, body {
-  padding-right: 10%;
-  padding-left: 10%;
+  padding-right: 5%;
+  padding-left: 5%;
   color: darkslategray;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  height: 100%
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
 }
 
 body {
@@ -12,22 +12,44 @@ body {
 }
 
 #heading {
-  padding-left: 10%;
-  padding-right: 10%;
-  background-color: whitesmoke;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(245, 245, 245);
+}
+
+#choose_license {
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(245, 245, 245);
+  flex: 1 0 auto;
+}
+
+#license_text {
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(245, 245, 245);
+  flex: 1 0 auto;
+}
+
+#text_area {
+  padding: 5%;
+  background-color: white;
+  line-height: 1.5;
+  text-align: justify;
+  white-space:pre;
 }
 
 #content {
-  padding-left: 10%;
-  padding-right: 10%;
-  background-color: whitesmoke;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(245, 245, 245);
   flex: 1 0 auto;
 }
 
 #footer{
-  padding-left: 10%;
-  padding-right: 10%;
-  background-color: whitesmoke;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(245, 245, 245);
   flex-shrink: 0;
   text-align: center;
  }
