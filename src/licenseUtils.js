@@ -68,6 +68,7 @@ function placeholderReplace ({name, email, licenseInfo}) {
     licenseText = licenseText.replace(dateRegex, thisYear)
   }
 
+  // replace if there is a match and value supplied
   if (userMatch && name) {
     licenseText = licenseText.replace(userRegex, name)
   }
