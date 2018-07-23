@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>License API</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="/js/site.js"></script>
-  </head>
-  <body>
-    <header id="heading">
-      <h1>License Api</h1>
-      <h2>An API for retrieving licenses programatically.</h2>
-    </header>
+
+<head>
+  <title>License API</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/js/site.js"></script>
+</head>
+
+<body>
+  <%- include('partials/header') -%>
     <div id="choose_license">
       <p>Choose a License:</p>
       <form id="license_form" action="/" method="post">
@@ -23,14 +21,14 @@
       </form>
     </div>
     <div id="license_text">
-      <h3><%= license_name; %></h3>
-      <p id="text_area"><%= license_text; %></p>
+      <% if (license_name) { %>
+        <h3><%= license_name  %></h3>
+      <% }; %>
+      <% if (license_text) { %>
+        <p id="text_area"><%= license_text %></p>
+      <% }; %>
     </div>
-    <div id="content">
-      <p>License Links:</p>
-    </div>
-    <footer id="footer">
-      <p>Feel free to use or fork any code from this project on <a href="https://github.com/Toyonut/licenseApi">Github</a>.</p>
-    </footer>
-  </body>
+  <%- include('partials/footer') -%>
+</body>
+
 </html>
