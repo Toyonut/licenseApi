@@ -5,26 +5,31 @@ const Apis = {
 
 function MakeList (lineItems) {
   const content = document.querySelector('#content')
-  let list = document.createElement('ol')
 
-  lineItems.forEach(lineItem => {
-    let item = document.createElement('li')
-    item.innerHTML = `<a href=${lineItem.url}>${lineItem.name}</a>`
-    list.appendChild(item)
-  })
+  if (content) {
+    let list = document.createElement('ol')
 
-  content.appendChild(list)
+    lineItems.forEach(lineItem => {
+      let item = document.createElement('li')
+      item.innerHTML = `<a href=${lineItem.url}>${lineItem.name}</a>`
+      list.appendChild(item)
+    })
+
+    content.appendChild(list)
+  }
 }
 
 function FillMenu (lineItems) {
   const licenseMenu = document.querySelector('#license_selector')
 
-  lineItems.forEach(lineItem => {
-    let option = document.createElement('option')
-    option.value = `${lineItem.shortName}`
-    option.innerText = `${lineItem.name}`
-    licenseMenu.appendChild(option)
-  })
+  if (licenseMenu) {
+    lineItems.forEach(lineItem => {
+      let option = document.createElement('option')
+      option.value = `${lineItem.shortName}`
+      option.innerText = `${lineItem.name}`
+      licenseMenu.appendChild(option)
+    })
+  }
 }
 
 function DisplayList (url) {
