@@ -9,7 +9,14 @@ const {placeholderReplace, getMinMaxShortName} = require('../src/licenseUtils')
 const joi = require('joi')
 
 router.get('/', (req, res, next) => {
-  res.render('index.ejs')
+  res.status(200).render('index.ejs', {
+    license_name: '',
+    license_text: ''
+  })
+})
+
+router.get('/howto', (req, res, next) => {
+  res.status(200).render('howto.ejs')
 })
 
 router.post('/', urlEncodedParser, (req, res, next) => {
