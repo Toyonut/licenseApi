@@ -9,7 +9,7 @@
 
 <body>
   <%- include('partials/header') -%>
-    <div id="choose_license">
+    <div class="content">
       <p>Choose a License:</p>
       <form id="license_form" action="/" method="post">
         <select name="license" id="license_selector">
@@ -20,7 +20,7 @@
         <input type="submit" id="submit_license">
       </form>
     </div>
-    <div id="license_text">
+    <div class="content">
       <% if (license_name) { %>
         <h3><%= license_name  %></h3>
       <% }; %>

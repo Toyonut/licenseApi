@@ -12,23 +12,36 @@ body {
 }
 
 #heading {
-  padding-left: 5%;
-  padding-right: 5%;
   background-color: rgb(245, 245, 245);
 }
-
-#choose_license {
-  padding-left: 5%;
-  padding-right: 5%;
-  background-color: rgb(245, 245, 245);
-  flex: 1 0 auto;
+/* Css for main menu */
+#heading>ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
 }
 
-#license_text {
-  padding-left: 5%;
-  padding-right: 5%;
-  background-color: rgb(245, 245, 245);
-  flex: 1 0 auto;
+#heading>ul>li {
+  float: left;
+}
+
+#heading>ul>li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#heading>ul>li a:hover {
+  background-color: #4CAF50;
+}
+
+.active {
+  background-color: #4CAF50;
 }
 
 #text_area {
@@ -39,7 +52,7 @@ body {
   white-space:pre;
 }
 
-#content {
+.content {
   padding-left: 5%;
   padding-right: 5%;
   background-color: rgb(245, 245, 245);

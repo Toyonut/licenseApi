@@ -3,8 +3,13 @@ const Apis = {
   getLicense: 'http://localhost:3000/license/get'
 }
 
+const Menus = {
+  home: '/',
+  howto: '/howto'
+}
+
 function MakeList (lineItems) {
-  const content = document.querySelector('#content')
+  const content = document.querySelector('#license_links')
 
   if (content) {
     let list = document.createElement('ol')
@@ -48,6 +53,26 @@ function DisplayList (url) {
     })
 }
 
+function MenuHighlight () {
+  const home = document.querySelectorAll('#heading>ul>li a')[0]
+  const howto = document.querySelectorAll('#heading>ul>li a')[1]
+
+  const Menus = {
+    home: '/',
+    howto: '/howto'
+  }
+
+  let urlPart = window.location.pathname
+  if (urlPart === Menus.home) {
+    home.className = 'active'
+  }
+
+  if (urlPart === Menus.howto) {
+    howto.className = 'active'
+  }
+}
+
 window.onload = function () {
   DisplayList(Apis.license)
+  MenuHighlight()
 }
