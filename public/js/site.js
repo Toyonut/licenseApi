@@ -54,22 +54,14 @@ function DisplayList (url) {
 }
 
 function MenuHighlight () {
-  const home = document.querySelectorAll('#heading>ul>li a')[0]
-  const howto = document.querySelectorAll('#heading>ul>li a')[1]
-
-  const Menus = {
-    home: '/',
-    howto: '/howto'
-  }
-
+  const menuItems = document.querySelectorAll('#heading>ul>li a')
   let urlPart = window.location.pathname
-  if (urlPart === Menus.home) {
-    home.className = 'active'
-  }
 
-  if (urlPart === Menus.howto) {
-    howto.className = 'active'
-  }
+  menuItems.forEach(item => {
+    if (item.getAttribute('href') === urlPart) {
+      item.className = 'active'
+    }
+  })
 }
 
 window.onload = function () {
