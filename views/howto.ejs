@@ -9,9 +9,22 @@
 
 <body>
   <%- include('partials/header') -%>
+    <div id="code_examples" class="content">
+      <h2>Using the api</h2>
+      <p>You can use the API with the links below using simple command line tools or it could be integrated into build tooling.</p>
+      <h3>Using Curl and Python3</h3>
+      <code class="codeblock">
+        curl -s 'http://localhost:3000/license/apache-2.0' | \
+        python3 -c "import sys, json; print(json.load(sys.stdin)['license_text'])" > LICENSE.md
+      </code>
+      <h3>Using Powershell</h3>
+      <code class="codeblock">
+        invoke-restmethod -uri 'http://localhost:3000/license/apache-2.0' |
+        select-object -expandproperty license_text |
+        out-file LICENSE.md
+      </code>
+    </div>
     <div class="content" id="license_links">
-      <h3>Using the api</h3>
-      <p>You can use it by doing stuff</p>
       <h3>License Links:</h3>
     </div>
   <%- include('partials/footer') -%>
