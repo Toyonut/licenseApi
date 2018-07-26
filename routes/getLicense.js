@@ -3,8 +3,16 @@
 const express = require('express')
 const router = express.Router()
 const licenseData = require('../src/data')
-const {placeholderReplace, getMinMaxShortName} = require('../src/licenseUtils')
+const {placeholderReplace, getMinMaxShortName, getLicenses} = require('../src/licenseUtils')
 const joi = require('joi')
+
+router.get('/', (req, res, next) => {
+  (async () => {
+    let licenses = await getLicenses(req)
+
+    res.status(200).json(licenses)
+  })()
+})
 
 router.get('/:licenseShortName/', (req, res, next) => {
   (async () => {

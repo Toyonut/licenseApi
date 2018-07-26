@@ -15,7 +15,7 @@ async function checkDbConnection () {
 }
 
 function buildUrl (req, shortName) {
-  return `${req.protocol}://${req.get('host')}${req.originalUrl}/get/${shortName}`
+  return `${req.protocol}://${req.get('host')}${req.originalUrl}/${shortName}`
 }
 
 async function getLicenses (req) {
