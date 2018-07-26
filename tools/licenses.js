@@ -43,4 +43,4 @@ async function invokeWebRequest (opts) {
   }
 }
 
-module.exports = GetLicenses
+module.exports.GetLicenses = GetLicenses

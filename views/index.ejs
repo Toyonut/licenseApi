@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>License API</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/js/site.js"></script>
+</head>
+
+<body>
+  <%- include('partials/header') -%>
+    <div class="content">
+      <p>Choose a License:</p>
+      <form id="license_form" action="/" method="post">
+        <select name="license" id="license_selector">
+        </select>
+        <p>Pre-Populate variables:</p>
+        <input type="text" name="email" value="Email">
+        <input type="text" name="name" value="Project or User Name">
+        <input type="submit" id="submit_license">
+      </form>
+    </div>
+    <div class="content">
+      <% if (license_name) { %>
+        <h3><%= license_name  %></h3>
+      <% }; %>
+      <% if (license_text) { %>
+        <p id="text_area"><%= license_text %></p>
+      <% }; %>
+    </div>
+  <%- include('partials/footer') -%>
+</body>
+
+</html>

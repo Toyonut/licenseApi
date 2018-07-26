@@ -4,20 +4,29 @@ const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
 const { checkDbConnection } = require('./src/licenseUtils')
+const path = require('path')
 
+// Routes
 const index = require('./routes/index')
-const license = require('./routes/license')
+const licenses = require('./routes/licenses')
+const getLicense = require('./routes/getLicense')
 const wimip = require('./routes/wimip')
 
 checkDbConnection()
 
 const app = express()
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, 'public')))
+
 app.use(helmet())
 app.use(logger('dev'))
 
 app.use('/', index)
-app.use('/license', license)
+app.use('/license', licenses)
+app.use('/license/get', getLicense)
 app.use('/wimip', wimip)
 
 // catch 404 and forward to error handler

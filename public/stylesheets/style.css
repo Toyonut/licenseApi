@@ -1,0 +1,94 @@
+html, body {
+  padding-right: 5%;
+  padding-left: 5%;
+  color: darkslategray;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#heading {
+  background-color: rgb(245, 245, 245);
+}
+/* Css for main menu */
+#heading>ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+#heading>ul>li {
+  float: left;
+}
+
+#heading>ul>li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#heading>ul>li a:hover {
+  background-color: limegreen;
+}
+
+.active {
+  background-color: limegreen;
+}
+
+input[type=select] {
+  border: 1px solid darkslategrey;
+  border-radius: 5;
+  padding: .5em;
+}
+
+input[type=text] {
+  border: 1px solid darkslategrey;
+  border-radius: 5;
+  padding: .5em;
+}
+
+#text_area {
+  padding: 5%;
+  background-color: white;
+  line-height: 1.5;
+  text-align: justify;
+  white-space:pre;
+}
+
+.content {
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(245, 245, 245);
+  flex: 1 0 auto;
+}
+
+.codeblock {
+  text-align: justify;
+  white-space:pre;
+  display: block;
+  border-left-color: limegreen;
+  border-left-style: solid;
+  background-color: white
+}
+
+#footer{
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(245, 245, 245);
+  flex-shrink: 0;
+  text-align: center;
+ }
+
+a {
+  color: #00B7FF;
+}
+
