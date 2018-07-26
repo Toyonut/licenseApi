@@ -8,7 +8,7 @@ const path = require('path')
 
 // Routes
 const index = require('./routes/index')
-const getLicense = require('./routes/getLicense')
+const license = require('./routes/license')
 const wimip = require('./routes/wimip')
 
 checkDbConnection()
@@ -24,7 +24,7 @@ app.use(helmet())
 app.use(logger('dev'))
 
 app.use('/', index)
-app.use('/license', getLicense)
+app.use('/license', license)
 app.use('/wimip', wimip)
 
 // catch 404 and forward to error handler
