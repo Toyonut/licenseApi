@@ -6,13 +6,23 @@
 <body>
   <%- include('partials/header') -%>
     <div class="content">
-      <p>Choose a License:</p>
+      <h4>Choose a License:</h4>
       <form id="license_form" action="/" method="post">
         <select name="license" id="license_selector">
         </select>
-        <p>Pre-Populate variables:</p>
-        <input type="text" name="email" value="Email">
-        <input type="text" name="name" value="Project or User Name">
+        <h4>Pre-Populate variables:</h4>
+        <div class="container">
+          <div class="row">
+            <div class="column">
+              <label for="name">User Name</label><input type="text" name="name">
+              <label for="project_name">Project Name</label><input type="text" name="project_name">
+            </div>
+            <div class="column">
+                <label for="email">Email</label><input type="text" name="email">
+              <label for="project_url">Project URL</label><input type="text" name="project_url">
+            </div>
+          </div>
+        </div>
         <input type="submit" id="submit_license">
       </form>
     </div>
