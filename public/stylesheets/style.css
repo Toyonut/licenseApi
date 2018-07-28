@@ -20,11 +20,11 @@ html, body {
 
 pre {
   background: lightgray;
-  border-left-color: blue
+  border-left-color: #3498DB
 }
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
-  background-color: blue
+  background-color: #3498DB
 }
 
 code {
@@ -32,7 +32,7 @@ code {
 }
 
 a {
-  color: blue;
+  color: #3498DB;
 }
 
 li {
@@ -40,8 +40,16 @@ li {
 }
 
 input[type='email']:focus, input[type='number']:focus, input[type='password']:focus, input[type='search']:focus, input[type='tel']:focus, input[type='text']:focus, input[type='url']:focus, input[type='color']:focus, input[type='date']:focus, input[type='month']:focus, input[type='week']:focus, input[type='datetime']:focus, input[type='datetime-local']:focus, input:not([type]):focus, textarea:focus, select:focus {
-  border-color: blue;
+  border-color: #3498DB;
   outline: 0;
+}
+
+.container {
+  margin: 0 0;
+  max-width: 200.0rem;
+  padding: 0 0;
+  position: relative;
+  width: 100%;
 }
 
 /* Css for main menu */
@@ -67,24 +75,24 @@ nav>ul>li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 0.7em;
   text-decoration: none;
 }
 
 /* Change the link color to dark gray on hover */
 nav>ul>li a:hover {
-  background-color: blue;
+  background-color: #3498DB;
   color: darkslategray;
 }
 
 .active {
-  background-color: blue;
+  background-color: #3498DB;
 }
 
 .codeblock {
   text-align: justify;
   display: block;
-  border-left-color: blue;
+  border-left-color: #3498DB;
   border-left-style: solid;
   background-color: lightgray;
   white-space: pre-wrap;
