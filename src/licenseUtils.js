@@ -53,16 +53,20 @@ async function getMinMaxShortName () {
   }
 }
 
-function placeholderReplace ({name, email, licenseInfo}) {
+function placeholderReplace ({name, email, licenseInfo, projectUrl, projectName}) {
   const thisYear = new Date().getFullYear()
   const dateRegex = new RegExp('\\[year\\]|\\[yyyy\\]', 'ig')
   const userRegex = new RegExp('\\[fullname\\]|\\[name of copyright owner\\]', 'ig')
   const emailRegex = new RegExp('\\[email\\]', 'ig')
+  const projectNameRegex = new RegExp('\\[project\\]', 'ig')
+  const projectUrlRegex = new RegExp('\\[projecturl\\]', 'ig')
 
   let licenseText = licenseInfo.license_text
   const dateMatch = licenseText.match(dateRegex)
   const userMatch = licenseText.match(userRegex)
   const emailMatch = licenseText.match(emailRegex)
+  const projectNameMatch = licenseText.match(projectNameRegex)
+  const projectUrlMatch = licenseText.match(projectUrlRegex)
 
   if (dateMatch) {
     licenseText = licenseText.replace(dateRegex, thisYear)
@@ -75,6 +79,14 @@ function placeholderReplace ({name, email, licenseInfo}) {
 
   if (emailMatch && email) {
     licenseText = licenseText.replace(emailRegex, email)
+  }
+
+  if (projectUrlMatch && projectUrl) {
+    licenseText = licenseText.replace(projectUrlRegex, projectUrl)
+  }
+
+  if (projectNameMatch && projectName) {
+    licenseText = licenseText.replace(projectNameRegex, projectName)
   }
 
   licenseInfo.license_text = licenseText

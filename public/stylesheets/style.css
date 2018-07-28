@@ -79,16 +79,17 @@ nav>ul>li a {
   text-decoration: none;
 }
 
+.active {
+  background-color:#2d89ef;
+}
+
 /* Change the link color to dark gray on hover */
 nav>ul>li a:hover {
   background-color:#2d89ef;
   color: darkslategray;
 }
 
-.active {
-  background-color:#2d89ef;
-}
-
+/* Additional elements*/
 .codeblock {
   text-align: justify;
   display: block;
@@ -100,8 +101,8 @@ nav>ul>li a:hover {
 }
 
 #footer{
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
   flex-shrink: 0;
   text-align: center;
  }

@@ -31,12 +31,22 @@ router.get('/:licenseShortName/', (req, res, next) => {
       requestParams.licenseShortName = req.params.licenseShortName
     }
 
+    if (req.params.project_url) {
+      requestParams.projectUrl = req.params.project_url
+    }
+
+    if (req.params.project_name) {
+      requestParams.projectName = req.params.project_name
+    }
+
     let nameLength = await getMinMaxShortName()
 
     const schema = joi.object().keys({
       licenseShortName: joi.string().min(nameLength.min).max(nameLength.max).required(),
-      name: joi.string().min(1).max(30),
-      email: joi.string().email()
+      name: joi.string().min(1).max(50),
+      email: joi.string().email(),
+      projectName: joi.string().min(1).max(50),
+      projectUrl: joi.string().min(1).max(50)
     })
 
     // validate the user parameters

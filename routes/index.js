@@ -28,21 +28,30 @@ router.post('/', urlEncodedParser, (req, res, next) => {
       requestParams.licenseShortName = req.body.license
     }
 
-    // Need to ignore these if they are defaults to avoid tripping up Joi.
-    // if (req.body.name) {
-    //   requestParams.name = req.body.name
-    // }
+    if (req.body.name) {
+      requestParams.name = req.body.name
+    }
 
-    // if (req.body.email) {
-    //   requestParams.email = req.body.email
-    // }
+    if (req.body.email) {
+      requestParams.email = req.body.email
+    }
+
+    if (req.body.project_url) {
+      requestParams.projectUrl = req.body.project_url
+    }
+
+    if (req.body.project_name) {
+      requestParams.projectName = req.body.project_name
+    }
 
     let nameLength = await getMinMaxShortName()
 
     const schema = joi.object().keys({
       licenseShortName: joi.string().min(nameLength.min).max(nameLength.max).required(),
-      name: joi.string().min(1).max(30),
-      email: joi.string().email()
+      name: joi.string().min(1).max(50),
+      email: joi.string().email(),
+      projectName: joi.string().min(1).max(50),
+      projectUrl: joi.string().min(1).max(50)
     })
 
     // validate the user parameters
