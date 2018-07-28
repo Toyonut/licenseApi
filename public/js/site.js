@@ -3,11 +3,6 @@ const Apis = {
   getLicense: 'http://localhost:3000/license/get'
 }
 
-const Menus = {
-  home: '/',
-  howto: '/howto'
-}
-
 function MakeList (lineItems) {
   const content = document.querySelector('#license_links')
 
@@ -54,7 +49,7 @@ function DisplayList (url) {
 }
 
 function MenuHighlight () {
-  const menuItems = document.querySelectorAll('#heading>ul>li a')
+  const menuItems = document.querySelectorAll('nav>ul>li a')
   let urlPart = window.location.pathname
 
   menuItems.forEach(item => {
