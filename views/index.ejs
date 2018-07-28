@@ -16,14 +16,14 @@
         <input type="submit" id="submit_license">
       </form>
     </div>
-    <div class="content">
-      <% if (license_name) { %>
-        <h3><%= license_name  %></h3>
-      <% }; %>
+    <% if (license_name) { %>
+      <h3><%= license_name  %></h3>
+    <% }; %>
+    <div><pre>
       <% if (license_text) { %>
         <p id="text_area"><%= license_text %></p>
       <% }; %>
-    </div>
+    </pre></div>
   <%- include('partials/footer') -%>
 </body>
 
