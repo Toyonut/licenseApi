@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>License API</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="/js/site.js"></script>
-</head>
+<%- include('partials/head') -%>
 
 <body>
   <%- include('partials/header') -%>
@@ -20,14 +16,14 @@
         <input type="submit" id="submit_license">
       </form>
     </div>
-    <div class="content">
-      <% if (license_name) { %>
-        <h3><%= license_name  %></h3>
-      <% }; %>
+    <% if (license_name) { %>
+      <h3><%= license_name  %></h3>
+    <% }; %>
+    <div><pre>
       <% if (license_text) { %>
         <p id="text_area"><%= license_text %></p>
       <% }; %>
-    </div>
+    </pre></div>
   <%- include('partials/footer') -%>
 </body>
 

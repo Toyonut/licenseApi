@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>License API</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="/js/site.js"></script>
-</head>
+<%- include('partials/head') -%>
 
 <body>
   <%- include('partials/header') -%>
-    <div id="code_examples" class="content">
+    <div id="code_examples">
       <h2>Using the api</h2>
       <p>You can use the API with the links below using simple command line tools or it could be integrated into build tooling.</p>
+      <p>Fetching http://localhost:3000/license will return you a list of available licenses in JSON format.</p>
+      <code class="codeblock">
+        [
+          {
+            "name" : "PostgreSQL License",
+            "shortName" : "postgresql",
+            "url" : "http://localhost:3000/license/postgresql"
+          },
+          {
+            "name" : "zlib License",
+            "shortName" : "zlib",
+            "url" : "http://localhost:3000/license/zlib"
+          }
+        ]
+      </code>
+      <p> The short names can be passed back to the api to retrieve individual license details in JSON format.</p>
       <h3>Using Curl and Python3</h3>
       <code class="codeblock">
         curl -s 'http://localhost:3000/license/apache-2.0' | \
@@ -24,7 +36,7 @@
         out-file LICENSE.md
       </code>
     </div>
-    <div class="content" id="license_links">
+    <div id="license_links">
       <h3>License Links:</h3>
     </div>
   <%- include('partials/footer') -%>
