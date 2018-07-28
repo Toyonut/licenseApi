@@ -1,33 +1,69 @@
 html, body {
-  padding-right: 5%;
-  padding-left: 5%;
+  padding-right: 10%;
+  padding-left: 10%;
   color: darkslategray;
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
   height: 100%;
-}
-
-body {
   display: flex;
   flex-direction: column;
 }
 
-#heading {
-  background-color: rgb(245, 245, 245);
+/* Include this stylesheet after Milligram or merge it with your main.css */
+/* overrides for milligram*/
+
+.navigation .title, .navigation-title {
+  color: #f2f2f2;
 }
+
+.navigation {
+  border-bottom: .1rem solid #1B1C1D;
+}
+
+pre {
+  background: lightgray;
+  border-left-color: blue
+}
+
+.button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+  background-color: blue
+}
+
+code {
+  background: lightgray;
+}
+
+a {
+  color: blue;
+}
+
+li {
+  margin-bottom: 1.0rem;
+}
+
+input[type='email']:focus, input[type='number']:focus, input[type='password']:focus, input[type='search']:focus, input[type='tel']:focus, input[type='text']:focus, input[type='url']:focus, input[type='color']:focus, input[type='date']:focus, input[type='month']:focus, input[type='week']:focus, input[type='datetime']:focus, input[type='datetime-local']:focus, input:not([type]):focus, textarea:focus, select:focus {
+  border-color: blue;
+  outline: 0;
+}
+
 /* Css for main menu */
-#heading>ul {
+nav {
+  padding-bottom: 1rem;
+}
+
+nav>ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #333;
+  border-radius: .4rem;
 }
 
-#heading>ul>li {
+nav>ul>li {
   float: left;
+  margin-bottom: 0%;
 }
 
-#heading>ul>li a {
+nav>ul>li a {
   display: block;
   color: white;
   text-align: center;
@@ -35,60 +71,29 @@ body {
   text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
-#heading>ul>li a:hover {
-  background-color: limegreen;
+/* Change the link color to dark gray on hover */
+nav>ul>li a:hover {
+  background-color: blue;
+  color: darkslategray;
 }
 
 .active {
-  background-color: limegreen;
-}
-
-input[type=select] {
-  border: 1px solid darkslategrey;
-  border-radius: 5;
-  padding: .5em;
-}
-
-input[type=text] {
-  border: 1px solid darkslategrey;
-  border-radius: 5;
-  padding: .5em;
-}
-
-#text_area {
-  padding: 5%;
-  background-color: white;
-  line-height: 1.5;
-  text-align: justify;
-  white-space:pre;
-}
-
-.content {
-  padding-left: 5%;
-  padding-right: 5%;
-  background-color: rgb(245, 245, 245);
-  flex: 1 0 auto;
+  background-color: blue;
 }
 
 .codeblock {
   text-align: justify;
-  white-space:pre;
   display: block;
-  border-left-color: limegreen;
+  border-left-color: blue;
   border-left-style: solid;
-  background-color: white
+  background-color: lightgray;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
 }
 
 #footer{
   padding-left: 5%;
   padding-right: 5%;
-  background-color: rgb(245, 245, 245);
   flex-shrink: 0;
   text-align: center;
  }
-
-a {
-  color: #00B7FF;
-}
-
