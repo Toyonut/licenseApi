@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 
 const initOptions = {
   // global event notification;
@@ -16,10 +17,16 @@ const initOptions = {
 
 const LicenseMethods = require('./dataAccess')
 const pgp = require('pg-promise')(initOptions)
-const config = require('../../config/dbConfig.json')
+const config = {
+  'host': process.env.DB_HOST,
+  'port': process.env.DB_PORT,
+  'database': process.env.DATABASE,
+  'user': process.env.DB_USER,
+  'password': process.env.DB_PASSWORD
+}
 
 const db = pgp(config)
 
-const Licenses = new LicenseMethods(db)
+const LicenseDAL = new LicenseMethods(db)
 
-module.exports = Licenses
+module.exports = LicenseDAL

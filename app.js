@@ -5,6 +5,7 @@ const logger = require('morgan')
 const helmet = require('helmet')
 const { checkDbConnection } = require('./src/licenseUtils')
 const path = require('path')
+require('dotenv').config()
 
 // Routes
 const index = require('./routes/index')
