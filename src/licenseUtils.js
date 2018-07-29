@@ -1,10 +1,10 @@
 'use strict'
 
-const licenseData = require('./data')
+const licenseDAL = require('./data')
 
 async function checkDbConnection () {
   try {
-    const obj = await licenseData.getConnectionAsync()
+    const obj = await licenseDAL.getConnectionAsync()
     if (obj) {
       console.log(`DB connected.`)
       obj.done()
@@ -19,7 +19,7 @@ function buildUrl (req, shortName) {
 }
 
 async function getLicenses (req) {
-  let result = await licenseData.getLicensesAsync()
+  let result = await licenseDAL.getLicensesAsync()
   let licenses = []
 
   for (let i = 0; i < result.length; i++) {
@@ -40,7 +40,7 @@ async function getLicenses (req) {
 
 async function getMinMaxShortName () {
   try {
-    let length = await licenseData.getMinMaxShortNameAsync()
+    let length = await licenseDAL.getMinMaxShortNameAsync()
 
     let nameLengths = {
       'min': length[0].min,
