@@ -19,61 +19,59 @@ router.get('/howto', (req, res, next) => {
   res.status(200).render('howto.ejs')
 })
 
-router.post('/', urlEncodedParser, (req, res, next) => {
-  (async () => {
-    // build requestParams object
-    let requestParams = {}
+router.post('/', urlEncodedParser, async (req, res, next) => {
+  // build requestParams object
+  let requestParams = {}
 
-    if (req.body.license) {
-      requestParams.licenseShortName = req.body.license
-    }
+  if (req.body.license) {
+    requestParams.licenseShortName = req.body.license
+  }
 
-    if (req.body.name) {
-      requestParams.name = req.body.name
-    }
+  if (req.body.name) {
+    requestParams.name = req.body.name
+  }
 
-    if (req.body.email) {
-      requestParams.email = req.body.email
-    }
+  if (req.body.email) {
+    requestParams.email = req.body.email
+  }
 
-    if (req.body.project_url) {
-      requestParams.projectUrl = req.body.project_url
-    }
+  if (req.body.project_url) {
+    requestParams.projectUrl = req.body.project_url
+  }
 
-    if (req.body.project_name) {
-      requestParams.projectName = req.body.project_name
-    }
+  if (req.body.project_name) {
+    requestParams.projectName = req.body.project_name
+  }
 
-    let nameLength = await getMinMaxShortName()
+  let nameLength = await getMinMaxShortName()
 
-    const schema = joi.object().keys({
-      licenseShortName: joi.string().min(nameLength.min).max(nameLength.max).required(),
-      name: joi.string().min(1).max(50),
-      email: joi.string().email(),
-      projectName: joi.string().min(1).max(50),
-      projectUrl: joi.string().min(1).max(50)
-    })
+  const schema = joi.object().keys({
+    licenseShortName: joi.string().min(nameLength.min).max(nameLength.max).required(),
+    name: joi.string().min(1).max(50),
+    email: joi.string().email(),
+    projectName: joi.string().min(1).max(50),
+    projectUrl: joi.string().min(1).max(50)
+  })
 
-    // validate the user parameters
-    const result = joi.validate(requestParams, schema)
+  // validate the user parameters
+  const result = joi.validate(requestParams, schema)
 
-    if (result.error === null) {
-      let licenseInfo = await licenseData.getLicenseAsync(requestParams.licenseShortName)
+  if (result.error === null) {
+    let licenseInfo = await licenseData.getLicenseAsync(requestParams.licenseShortName)
 
-      if (licenseInfo.length === 0) {
-        const err = new Error('Not Found')
-        err.status = 404
-        next(err)
-      } else {
-        requestParams.licenseInfo = licenseInfo[0]
-        res.status(200).render('index.ejs', placeholderReplace(requestParams))
-      }
-    } else {
-      let err = result.error
-      err.status = 400
+    if (licenseInfo.length === 0) {
+      const err = new Error('Not Found')
+      err.status = 404
       next(err)
+    } else {
+      requestParams.licenseInfo = licenseInfo[0]
+      res.status(200).render('index.ejs', placeholderReplace(requestParams))
     }
-  })()
+  } else {
+    let err = result.error
+    err.status = 400
+    next(err)
+  }
 })
 
 module.exports = router
