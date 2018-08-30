@@ -8,23 +8,23 @@
     <div id="code_examples">
       <h2>Using the API</h2>
       <p>You can use the API with the links below using simple command line tools or it could be integrated into build tooling.</p>
-      <p>Fetching http(s)//<%= host_name  %>/license will return you a list of available licenses in JSON format.</p>
+      <p>Fetching https://<%= host_name  %>/license will return you a list of available licenses in JSON format.</p>
       <code class="codeblock">
         [
           {
             "name" : "PostgreSQL License",
             "shortName" : "postgresql",
-            "url" : "http(s)//<%= host_name  %>/license/postgresql"
+            "url" : "https://<%= host_name  %>/license/postgresql"
           },
           {
             "name" : "zlib License",
             "shortName" : "zlib",
-            "url" : "http(s)//<%= host_name  %>/license/zlib"
+            "url" : "https://<%= host_name  %>/license/zlib"
           }
         ]
       </code>
       <p>
-        The short names can be passed back to the api with http(s)//<%= host_name  %>/license/:shortName to retrieve individual license details in JSON format. <br>
+        The short names can be passed back to the api with https://<%= host_name  %>/license/:shortName to retrieve individual license details in JSON format. <br>
         If you would like to set any of the variables from the api, you can pass them in as query parameters. <br>
         <code class="codeblock">
           ?name=fullname&email=user@email&project_name=project_name&project_url=project_url
@@ -32,12 +32,12 @@
       </p>
       <h3>Using Curl and Python3</h3>
       <code class="codeblock">
-        curl -s 'http(s)//<%= host_name  %>/license/apache-2.0' | \
+        curl -s 'https://<%= host_name  %>/license/apache-2.0' | \
         python3 -c "import sys, json; print(json.load(sys.stdin)['license_text'])" > LICENSE.md
       </code>
       <h3>Using Powershell</h3>
       <code class="codeblock">
-        invoke-restmethod -uri 'http(s)//<%= host_name  %>/license/apache-2.0' |
+        invoke-restmethod -uri 'https://<%= host_name  %>/license/apache-2.0' |
         select-object -expandproperty license_text |
         out-file LICENSE.md
       </code>
