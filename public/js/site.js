@@ -1,6 +1,6 @@
 const Apis = {
-  license: 'http://localhost:3000/license',
-  getLicense: 'http://localhost:3000/license/get'
+  license: '/license',
+  getLicense: '/license/get'
 }
 
 function MakeList (lineItems) {
