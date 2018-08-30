@@ -16,7 +16,9 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/howto', (req, res, next) => {
-  res.status(200).render('howto.ejs')
+  res.status(200).render('howto.ejs', {
+    host_name: req.headers.host
+  })
 })
 
 router.post('/', urlEncodedParser, async (req, res, next) => {
