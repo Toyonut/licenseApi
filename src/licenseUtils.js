@@ -109,7 +109,7 @@ function placeholderReplace ({name, email, licenseInfo, projectUrl, projectName}
     licenseText = licenseText.replace(projectNameRegex, projectName)
   }
 
-  licenseInfo.license_text = licenseText
+  licenseInfo.licenseText = licenseText
   return licenseInfo
 }
 
