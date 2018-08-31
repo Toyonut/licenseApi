@@ -10,7 +10,6 @@ require('dotenv').config()
 // Routes
 const index = require('./routes/index')
 const license = require('./routes/license')
-const wimip = require('./routes/wimip')
 
 checkDbConnection()
 
@@ -27,7 +26,6 @@ app.use(logger('dev'))
 
 app.use('/', index)
 app.use('/license', license)
-app.use('/wimip', wimip)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
