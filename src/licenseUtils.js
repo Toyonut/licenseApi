@@ -38,6 +38,26 @@ async function getLicenses (req) {
   return licenses
 }
 
+async function getLicense (licenseShortName) {
+  try {
+    let licenseInfo = await licenseDAL.getLicenseAsync(licenseShortName)
+
+    if (licenseInfo.length === 0) {
+      return {}
+    } else {
+      return {
+        id: licenseInfo[0].id,
+        licenseName: licenseInfo[0].license_name,
+        licenseText: licenseInfo[0].license_text,
+        licenseUrl: licenseInfo[0].license_url,
+        licenseShortName: licenseInfo[0].license_short_name
+      }
+    }
+  } catch (err) {
+    console.error(`${err}`)
+  }
+}
+
 async function getMinMaxShortName () {
   try {
     let length = await licenseDAL.getMinMaxShortNameAsync()
@@ -61,7 +81,7 @@ function placeholderReplace ({name, email, licenseInfo, projectUrl, projectName}
   const projectNameRegex = new RegExp('\\[project\\]', 'ig')
   const projectUrlRegex = new RegExp('\\[projecturl\\]', 'ig')
 
-  let licenseText = licenseInfo.license_text
+  let licenseText = licenseInfo.licenseText
   const dateMatch = licenseText.match(dateRegex)
   const userMatch = licenseText.match(userRegex)
   const emailMatch = licenseText.match(emailRegex)
@@ -96,6 +116,7 @@ function placeholderReplace ({name, email, licenseInfo, projectUrl, projectName}
 module.exports = {
   checkDbConnection,
   getLicenses,
+  getLicense,
   placeholderReplace,
   getMinMaxShortName
 }

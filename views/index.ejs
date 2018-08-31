@@ -18,23 +18,23 @@
           <div class="row">
             <div class="column">
               <label for="name">User Name</label><input type="text" name="name">
-              <label for="project_name">Project Name</label><input type="text" name="project_name">
+              <label for="projectName">Project Name</label><input type="text" name="projectName">
             </div>
             <div class="column">
                 <label for="email">Email</label><input type="text" name="email">
-              <label for="project_url">Project URL</label><input type="text" name="project_url">
+              <label for="projectUrl">Project URL</label><input type="text" name="projectUrl">
             </div>
           </div>
         </div>
         <input type="submit" id="submit_license">
       </form>
     </div>
-    <% if (license_name) { %>
-      <h3><%= license_name  %></h3>
+    <% if (licenseName) { %>
+      <h3><%= licenseName  %></h3>
     <% }; %>
     <div><pre>
-      <% if (license_text) { %>
-        <p id="text_area"><%= license_text %></p>
+      <% if (licenseText) { %>
+        <p id="text_area"><%= licenseText %></p>
       <% }; %>
     </pre></div>
   <%- include('partials/footer') -%>

@@ -27,18 +27,21 @@
         The short names can be passed back to the api with https://<%= host_name  %>/license/:shortName to retrieve individual license details in JSON format. <br>
         If you would like to set any of the variables from the api, you can pass them in as query parameters. <br>
         <code class="codeblock">
-          ?name=fullname&email=user@email&project_name=project_name&project_url=project_url
+          ?name=fullname
+          &email=user@email
+          &projectName=project_name
+          &projectUrl=project_url
         </code>
       </p>
       <h3>Using Curl and Python3</h3>
       <code class="codeblock">
         curl -s 'https://<%= host_name  %>/license/apache-2.0' | \
-        python3 -c "import sys, json; print(json.load(sys.stdin)['license_text'])" > LICENSE.md
+        python3 -c "import sys, json; print(json.load(sys.stdin)['licenseText'])" > LICENSE.md
       </code>
       <h3>Using Powershell</h3>
       <code class="codeblock">
         invoke-restmethod -uri 'https://<%= host_name  %>/license/apache-2.0' |
-        select-object -expandproperty license_text |
+        select-object -expandproperty licenseText |
         out-file LICENSE.md
       </code>
       <h3>Using Node</h3>
@@ -58,7 +61,7 @@
           res.on('end', () => {
             let data = JSON.parse(apiData.join(''))
             try {
-              fs.writeFileSync('./license.md', data.license_text)
+              fs.writeFileSync('./license.md', data.licenseText)
             } catch (err) {
               console.error(err)
             }
