@@ -41,6 +41,30 @@
         select-object -expandproperty license_text |
         out-file LICENSE.md
       </code>
+      <h3>Using Node</h3>
+      <code class="codeblock">
+        const https = require('https')
+        const fs = require('fs')
+
+        let licenseUrl = 'https://os-license-api.herokuapp.com/license/mit'
+
+        https.get(licenseUrl, res => {
+          let apiData = []
+
+          res.on('data', (dataChunk) => {
+            apiData.push(dataChunk)
+          })
+
+          res.on('end', () => {
+            let data = JSON.parse(apiData.join(''))
+            try {
+              fs.writeFileSync('./license.md', data.license_text)
+            } catch (err) {
+              console.error(err)
+            }
+          })
+        })
+      </code>
     </div>
     <div id="license_links">
       <h3>License Links:</h3>
