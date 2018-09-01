@@ -65,11 +65,11 @@ router.post('/', urlEncodedParser, async (req, res, next) => {
       const err = new Error('Not Found')
       err.status = 404
       next(err)
+    } else {
+      requestParams.licenseInfo = licenseInfo
+
+      res.status(200).render('index.ejs', placeholderReplace(requestParams))
     }
-
-    requestParams.licenseInfo = licenseInfo
-
-    res.status(200).render('index.ejs', placeholderReplace(requestParams))
   } else {
     let err = result.error
     err.status = 400

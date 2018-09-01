@@ -56,11 +56,11 @@ router.get('/:licenseShortName/', async (req, res, next) => {
       const err = new Error('Not Found')
       err.status = 404
       next(err)
+    } else {
+      requestParams.licenseInfo = licenseInfo
+
+      res.status(200).json(placeholderReplace(requestParams))
     }
-
-    requestParams.licenseInfo = licenseInfo
-
-    res.status(200).json(placeholderReplace(requestParams))
   } else {
     let err = result.error
     err.status = 400
