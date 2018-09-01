@@ -19,8 +19,11 @@ The idea is that there could be simple command line apps to make a fetch a licen
   2. `psql -a -U postgres -W -f 001createNodeUser.sql` - create the node user.
   3. `psql -a -U postgres -W-f 002createDB.sql` - create the database.
   4. `psql -d licensedata -U postgres -W -a -f 003createTable.sql` - create the table and schema in the new database.
-* run the scraper to pull the license data from https://choosealicense.com/.
-  1. `node tools/scraper.js` - scrapes the data and puts it into the postgres table.
+* you can either run a web scraper or use the json data file to set up the DB data.
+  1. run the scraper to pull the license data from https://choosealicense.com/.
+    `node tools/scraper.js` - scrapes the data and puts it into the postgres table.
+  2. The preferred way would be to run the json_to_db tool.
+    s`node tools/json_to_db.js` - uses the json file in `data/license_info.json` to populate the database.
 * start a development server and test.
   1. `npm run dev` - start the development server on port 3000.
   2. use curl, powershell, insomnia, postman or any other tool to check it is running and sending data.
@@ -43,6 +46,32 @@ The idea is that there could be simple command line apps to make a fetch a licen
   invoke-restmethod -uri 'http://localhost:3000/license/apache-2.0' |
   select-object -expandproperty license_text |
   out-file LICENSE.md
+  ```
+
+* Node/JS:
+
+  ```Javascript
+  const https = require('https')
+  const fs = require('fs')
+
+  let licenseUrl = 'https://os-license-api.herokuapp.com/license/mit'
+
+  https.get(licenseUrl, res => {
+    let apiData = []
+
+    res.on('data', (dataChunk) => {
+      apiData.push(dataChunk)
+    })
+
+    res.on('end', () => {
+      let data = JSON.parse(apiData.join(''))
+      try {
+        fs.writeFileSync('./license.md', data.licenseText)
+      } catch (err) {
+        console.error(err)
+      }
+    })
+  })
   ```
 
 * Integrated with tooling. For example, `NPM init` could pull down the relevent license during the init process.
