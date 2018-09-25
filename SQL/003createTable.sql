@@ -1,11 +1,14 @@
-DROP TABLE IF EXISTS license_info;
+DROP TABLE IF EXISTS licenseinfo;
 
-CREATE TABLE IF NOT EXISTS license_info (
-  id SERIAL PRIMARY KEY,
-  license_name VARCHAR(100) not null,
-  license_text TEXT not null,
-  license_url VARCHAR(200) not null,
-  license_short_name VARCHAR(40)
+CREATE TABLE IF NOT EXISTS LicenseInfo (
+  id VARCHAR(40) PRIMARY KEY,
+  name VARCHAR(100) not null,
+  licensetext TEXT not null,
+  url VARCHAR(200) not null,
+  description TEXT,
+  permissions VARCHAR(200) [],
+  conditions VARCHAR(200) [],
+  limitations VARCHAR(200) []
 );
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO nodeuser;
