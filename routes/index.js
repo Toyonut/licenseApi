@@ -25,7 +25,7 @@ router.post('/', urlEncodedParser, async (req, res, next) => {
   let requestParams = {}
 
   if (req.body.license) {
-    requestParams.licenseShortName = req.body.license
+    requestParams.id = req.body.license
   }
 
   if (req.body.name) {
@@ -44,10 +44,12 @@ router.post('/', urlEncodedParser, async (req, res, next) => {
     requestParams.projectName = req.body.projectName
   }
 
+  console.log(`index: ${requestParams}`)
+
   let nameLength = await getMinMaxShortName()
 
   const schema = joi.object().keys({
-    licenseShortName: joi.string().min(nameLength.min).max(nameLength.max).required(),
+    id: joi.string().min(nameLength.min).max(nameLength.max).required(),
     name: joi.string().min(1).max(50),
     email: joi.string().email(),
     projectName: joi.string().min(1).max(50),
@@ -58,7 +60,7 @@ router.post('/', urlEncodedParser, async (req, res, next) => {
   const result = joi.validate(requestParams, schema)
 
   if (result.error === null) {
-    let licenseInfo = await getLicense(requestParams.licenseShortName)
+    let licenseInfo = await getLicense(requestParams.id)
 
     // check if we return an empty object which indicates there was nothing returned from the SQL query
     if (Object.keys(licenseInfo).length === 0 && licenseInfo.constructor === Object) {
