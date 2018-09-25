@@ -14,7 +14,7 @@ writeRecordsAsync()
 
 async function writeRecordsAsync () {
   try {
-    let inputFilePath = path.join('data', 'license_info.json')
+    let inputFilePath = path.join('data', 'full_license_info.json')
 
     let fileContents = await readFileAsync(inputFilePath)
 
@@ -22,10 +22,14 @@ async function writeRecordsAsync () {
 
     jsonDataArray.forEach(async jsonData => {
       let fields = {
-        'licenseName': jsonData.license_name,
-        'licenseText': jsonData.license_text,
-        'url': jsonData.license_url,
-        'licenseShortName': jsonData.license_short_name
+        'id': jsonData.id,
+        'name': jsonData.name,
+        'licenseText': jsonData.licensetext,
+        'url': jsonData.url,
+        'description': jsonData.description,
+        'permissions': jsonData.permissions,
+        'conditions': jsonData.conditions,
+        'limitations': jsonData.limitations
       }
 
       console.dir(fields)
@@ -37,8 +41,17 @@ async function writeRecordsAsync () {
 }
 
 async function insertOneRecordAsync (licenseData) {
-  const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url, license_short_name) VALUES($1, $2, $3, $4) RETURNING id',
-    [licenseData.licenseName, licenseData.licenseText, licenseData.url, licenseData.licenseShortName])
+  const insertStatement = new PQ(`
+    INSERT INTO LicenseInfo(id, name, licensetext, url, description, permissions, conditions, limitations)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+    [licenseData.id,
+     licenseData.name,
+     licenseData.licenseText,
+     licenseData.url,
+     licenseData.description,
+     licenseData.permissions,
+     licenseData.conditions,
+     licenseData.limitations])
 
   try {
     let result = await db.one(insertStatement)
