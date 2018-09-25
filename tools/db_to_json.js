@@ -13,11 +13,11 @@ const db = pgp(process.env.DATABASE_URL)
 getRecordsAsync()
 
 async function getRecordsAsync () {
-  const getStatement = new PQ('select * from license_info')
+  const getStatement = new PQ('select * from licenseinfo')
 
   try {
     let result = await db.result(getStatement)
-    let outputFilePath = path.join('data', 'license_info.json')
+    let outputFilePath = path.join('data', 'full_license_info.json')
 
     try {
       console.log(`Writing data to ${outputFilePath}`)
