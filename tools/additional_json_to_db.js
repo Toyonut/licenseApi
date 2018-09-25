@@ -38,12 +38,12 @@ async function writeRecordsAsync () {
 }
 
 async function insertOneRecordAsync (licenseData) {
-  const insertStatement = new PQ(`update license_info
-  set description = $1,
+  const insertStatement = new PQ(`UPDATE license_info
+  SET description = $1,
     permissions = $2,
     conditions = $3,
     limitations = $4
-  where license_short_name = $5
+  WHERE license_short_name = $5
   RETURNING id`,
     [licenseData.description, licenseData.permissions, licenseData.conditions, licenseData.limitations, licenseData.id])
 
