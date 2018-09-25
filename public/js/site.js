@@ -25,7 +25,7 @@ function FillMenu (lineItems) {
   if (licenseMenu) {
     lineItems.forEach(lineItem => {
       let option = document.createElement('option')
-      option.value = `${lineItem.shortName}`
+      option.value = `${lineItem.id}`
       option.innerText = `${lineItem.name}`
       licenseMenu.appendChild(option)
     })
