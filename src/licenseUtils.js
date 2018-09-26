@@ -23,11 +23,7 @@ async function getLicenses (req) {
   let licenses = []
 
   for (let i = 0; i < result.length; i++) {
-    let details = {
-      name: '',
-      shortName: '',
-      url: ''
-    }
+    let details = {}
 
     details.id = result[i].id
     details.name = result[i].name
