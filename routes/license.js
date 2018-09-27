@@ -35,8 +35,6 @@ router.get('/:id/', async (req, res, next) => {
     requestParams.projectName = req.params.projectName
   }
 
-  console.log(`license: ${requestParams}`)
-
   let nameLength = await getMinMaxShortName()
 
   const schema = joi.object().keys({

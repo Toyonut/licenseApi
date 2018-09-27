@@ -44,8 +44,6 @@ router.post('/', urlEncodedParser, async (req, res, next) => {
     requestParams.projectName = req.body.projectName
   }
 
-  console.log(`index: ${requestParams}`)
-
   let nameLength = await getMinMaxShortName()
 
   const schema = joi.object().keys({
