@@ -12,13 +12,13 @@
       <code class="codeblock">
         [
           {
+            "id": "postgresql",
             "name" : "PostgreSQL License",
-            "shortName" : "postgresql",
             "url" : "https://<%= host_name  %>/license/postgresql"
           },
           {
+            "id": "zlib",
             "name" : "zlib License",
-            "shortName" : "zlib",
             "url" : "https://<%= host_name  %>/license/zlib"
           }
         ]
@@ -49,7 +49,7 @@
         const https = require('https')
         const fs = require('fs')
 
-        let licenseUrl = 'https://os-license-api.herokuapp.com/license/mit'
+        let licenseUrl = 'https://<%= host_name  %>/license/mit'
 
         https.get(licenseUrl, res => {
           let apiData = []
