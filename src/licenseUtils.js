@@ -43,9 +43,13 @@ async function getLicense (id) {
     } else {
       return {
         id: licenseInfo[0].id,
-        licenseName: licenseInfo[0].name,
+        name: licenseInfo[0].name,
         licenseText: licenseInfo[0].licensetext,
-        licenseUrl: licenseInfo[0].url
+        url: licenseInfo[0].url,
+        description: licenseInfo[0].description,
+        permissions: licenseInfo[0].permissions,
+        conditions: licenseInfo[0].conditions,
+        limitations: licenseInfo[0].limitations
       }
     }
   } catch (err) {
