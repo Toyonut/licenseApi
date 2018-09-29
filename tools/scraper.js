@@ -48,8 +48,13 @@ async function GetWwebContent (url) {
 }
 
 async function insertOneRecordAsync (licenseData) {
-  const insertStatement = new PQ('INSERT INTO LicenseInfo(Id, Name, LicenseText, Url) VALUES($1, $2, $3, $4) RETURNING id',
-  [licenseData.licenseShortName, licenseData.name, licenseData.licenseText, licenseData.Url])
+  const insertStatement = new PQ(
+    `INSERT INTO LicenseInfo(id, name, licensetext, url)
+    VALUES($1, $2, $3, $4) RETURNING id`,
+    [licenseData.id,
+    licenseData.name,
+    licenseData.licenseText,
+    licenseData.url])
 
   try {
     let result = await db.one(insertStatement)
