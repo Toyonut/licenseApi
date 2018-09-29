@@ -17,7 +17,7 @@ const db = pgp(process.env.DATABASE_URL);
       let webContent = await GetWwebContent(url)
 
       let fields = {
-        'licenseName': webContent('h1').text(),
+        'name': webContent('h1').text(),
         'licenseText': webContent('#license-text').text(),
         'url': url,
         'licenseShortName': getShortName(url)
@@ -48,8 +48,8 @@ async function GetWwebContent (url) {
 }
 
 async function insertOneRecordAsync (licenseData) {
-  const insertStatement = new PQ('INSERT INTO license_info(license_name, license_text, license_url, license_short_name) VALUES($1, $2, $3, $4) RETURNING id',
-    [licenseData.licenseName, licenseData.licenseText, licenseData.url, licenseData.licenseShortName])
+  const insertStatement = new PQ('INSERT INTO LicenseInfo(Id, Name, LicenseText, Url) VALUES($1, $2, $3, $4) RETURNING id',
+  [licenseData.licenseShortName, licenseData.name, licenseData.licenseText, licenseData.Url])
 
   try {
     let result = await db.one(insertStatement)

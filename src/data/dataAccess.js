@@ -12,7 +12,7 @@ class Licenses {
 
   getLicensesAsync () {
     const statement = new PQ({
-      text: 'select license_name, license_short_name from license_info'
+      text: 'select name, id from licenseinfo'
     })
     try {
       return this.db.query(statement)
@@ -23,7 +23,7 @@ class Licenses {
 
   getMinMaxShortNameAsync () {
     const statement = new PQ({
-      text: 'select max(length(license_short_name)), min(length(license_short_name)) from license_info'
+      text: 'select max(length(id)), min(length(id)) from licenseinfo'
     })
     try {
       return this.db.query(statement)
@@ -32,10 +32,10 @@ class Licenses {
     }
   }
 
-  getLicenseAsync (licenseShortName) {
+  getLicenseAsync (id) {
     const statement = new PQ({
-      text: 'select * from license_info where license_short_name = $1',
-      values: [licenseShortName]
+      text: 'select * from licenseinfo where id = $1',
+      values: [id]
     })
     try {
       return this.db.query(statement)

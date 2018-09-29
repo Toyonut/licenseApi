@@ -23,34 +23,29 @@ async function getLicenses (req) {
   let licenses = []
 
   for (let i = 0; i < result.length; i++) {
-    let details = {
-      name: '',
-      shortName: '',
-      url: ''
-    }
+    let details = {}
 
-    details.name = result[i].license_name
-    details.shortName = result[i].license_short_name
-    details.url = buildUrl(req, result[i].license_short_name)
+    details.id = result[i].id
+    details.name = result[i].name
+    details.url = buildUrl(req, result[i].id)
 
     licenses.push(details)
   }
   return licenses
 }
 
-async function getLicense (licenseShortName) {
+async function getLicense (id) {
   try {
-    let licenseInfo = await licenseDAL.getLicenseAsync(licenseShortName)
+    let licenseInfo = await licenseDAL.getLicenseAsync(id)
 
     if (licenseInfo.length === 0) {
       return {}
     } else {
       return {
         id: licenseInfo[0].id,
-        licenseName: licenseInfo[0].license_name,
-        licenseText: licenseInfo[0].license_text,
-        licenseUrl: licenseInfo[0].license_url,
-        licenseShortName: licenseInfo[0].license_short_name
+        licenseName: licenseInfo[0].name,
+        licenseText: licenseInfo[0].licensetext,
+        licenseUrl: licenseInfo[0].url
       }
     }
   } catch (err) {
