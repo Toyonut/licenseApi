@@ -9,7 +9,7 @@ const joi = require('joi')
 
 router.get('/', (req, res, next) => {
   res.status(200).render('index.ejs', {
-    licenseName: '',
+    name: '',
     licenseText: ''
   })
 })
