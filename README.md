@@ -23,7 +23,7 @@ The idea is that there could be simple command line apps to make a fetch a licen
   1. run the scraper to pull the license data from https://choosealicense.com/.
     `node tools/scraper.js` - scrapes the data and puts it into the postgres table.
   2. The preferred way would be to run the json_to_db tool.
-    s`node tools/json_to_db.js` - uses the json file in `data/license_info.json` to populate the database.
+    s`node tools/json_to_db.js` - uses the json file in `data/full_license_info.json` to populate the database.
 * start a development server and test.
   1. `npm run dev` - start the development server on port 3000.
   2. use curl, powershell, insomnia, postman or any other tool to check it is running and sending data.
