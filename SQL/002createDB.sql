@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS licensedata;
+
 CREATE DATABASE licensedata
   WITH
   OWNER = postgres
