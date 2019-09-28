@@ -32,7 +32,7 @@ async function writeRecordsAsync () {
         'limitations': jsonData.limitations
       }
 
-      console.dir(fields)
+      // console.dir(fields)
       insertOneRecordAsync(fields)
     })
   } catch (error) {
@@ -41,17 +41,21 @@ async function writeRecordsAsync () {
 }
 
 async function insertOneRecordAsync (licenseData) {
+  // console.log(licenseData.id)
   const insertStatement = new PQ(`
     INSERT INTO LicenseInfo(id, name, licensetext, url, description, permissions, conditions, limitations)
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
-    [licenseData.id,
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`)
+
+  insertStatement.values = [
+    licenseData.id,
      licenseData.name,
      licenseData.licenseText,
      licenseData.url,
      licenseData.description,
      licenseData.permissions,
      licenseData.conditions,
-     licenseData.limitations])
+     licenseData.limitations
+  ]
 
   try {
     let result = await db.one(insertStatement)
