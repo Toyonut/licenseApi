@@ -55,7 +55,7 @@ router.post('/', urlEncodedParser, async (req, res, next) => {
   })
 
   // validate the user parameters
-  const result = joi.validate(requestParams, schema)
+  const result = schema.validate(requestParams)
 
   if (result.error === null) {
     let licenseInfo = await getLicense(requestParams.id)
