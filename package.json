@@ -7,20 +7,20 @@
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "debug": "~4.0.1",
-    "dotenv": "^6.0.0",
-    "ejs": "^2.6.1",
-    "express": "^4.16.3",
-    "helmet": "^3.13.0",
-    "joi": "^13.7.0",
+    "body-parser": "^1.19.0",
+    "debug": "~4.1.1",
+    "dotenv": "^8.1.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "@hapi/joi": "^16.1.4",
     "morgan": "^1.9.1",
-    "pg-promise": "^8.4.6"
+    "pg-promise": "^9.2.1"
   },
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "nodemon": "^1.18.4",
+    "cheerio": "^1.0.0-rc.3",
+    "nodemon": "^1.19.2",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.4"
   }
 }
