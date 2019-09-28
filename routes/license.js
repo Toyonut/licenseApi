@@ -3,7 +3,7 @@
 const express = require('express')
 const router = express.Router()
 const {placeholderReplace, getMinMaxShortName, getLicenses, getLicense} = require('../src/licenseUtils')
-const joi = require('joi')
+const joi = require('@hapi/joi')
 
 router.get('/', async (req, res, next) => {
   let licenses = await getLicenses(req)

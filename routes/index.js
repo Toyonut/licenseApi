@@ -5,7 +5,7 @@ const router = express.Router()
 const bodyParser = require('body-parser')
 const urlEncodedParser = bodyParser.urlencoded({ extended: true })
 const {placeholderReplace, getMinMaxShortName, getLicense} = require('../src/licenseUtils')
-const joi = require('joi')
+const joi = require('@hapi/joi')
 
 router.get('/', (req, res, next) => {
   res.status(200).render('index.ejs', {
