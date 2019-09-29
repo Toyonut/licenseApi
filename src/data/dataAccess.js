@@ -33,10 +33,10 @@ class Licenses {
   }
 
   getLicenseAsync (id) {
-    const statement = new PQ({
-      text: 'select * from licenseinfo where id = $1',
-      values: [id]
-    })
+    const statement = new PQ(
+      'select * from licenseinfo where id = $1'
+    )
+    statement.values = id
     try {
       return this.db.query(statement)
     } catch (err) {
