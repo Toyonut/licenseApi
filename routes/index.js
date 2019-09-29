@@ -55,23 +55,25 @@ router.post('/', urlEncodedParser, async (req, res, next) => {
   })
 
   // validate the user parameters
-  const result = schema.validate(requestParams)
+  try {
+    const value = await schema.validateAsync(requestParams);
 
-  if (result.error === null) {
-    let licenseInfo = await getLicense(requestParams.id)
+    if (value !== null) {
+      let licenseInfo = await getLicense(requestParams.id)
 
-    // check if we return an empty object which indicates there was nothing returned from the SQL query
-    if (Object.keys(licenseInfo).length === 0 && licenseInfo.constructor === Object) {
-      const err = new Error('Not Found')
-      err.status = 404
-      next(err)
-    } else {
-      requestParams.licenseInfo = licenseInfo
+      // check if we return an empty object which indicates there was nothing returned from the SQL query
+      if (Object.keys(licenseInfo).length === 0 && licenseInfo.constructor === Object) {
+        const err = new Error('Not Found')
+        err.status = 404
+        next(err)
+      } else {
+        requestParams.licenseInfo = licenseInfo
 
-      res.status(200).render('index.ejs', placeholderReplace(requestParams))
+        res.status(200).render('index.ejs', placeholderReplace(requestParams))
+      }
     }
-  } else {
-    let err = result.error
+  }
+  catch (err) {
     err.status = 400
     next(err)
   }
