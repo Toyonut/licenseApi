@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "lint": "semistandard --fix"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -21,6 +22,7 @@
     "cheerio": "^1.0.0-rc.3",
     "nodemon": "^1.19.4",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "semistandard": "^14.2.0"
   }
 }
