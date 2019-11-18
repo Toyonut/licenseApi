@@ -1,41 +1,41 @@
-'use strict'
+'use strict';
 
-const express = require('express')
-const router = express.Router()
-const {placeholderReplace, getMinMaxShortName, getLicenses, getLicense} = require('../src/licenseUtils')
-const joi = require('@hapi/joi')
+const express = require('express');
+const router = express.Router();
+const { placeholderReplace, getMinMaxShortName, getLicenses, getLicense } = require('../src/licenseUtils');
+const joi = require('@hapi/joi');
 
 router.get('/', async (req, res, next) => {
-  let licenses = await getLicenses(req)
+  const licenses = await getLicenses(req);
 
-  res.status(200).json(licenses)
-})
+  res.status(200).json(licenses);
+});
 
 router.get('/:id/', async (req, res, next) => {
   // build requestParams object
-  let requestParams = {}
+  const requestParams = {};
 
   if (req.query.name) {
-    requestParams.name = req.query.name
+    requestParams.name = req.query.name;
   }
 
   if (req.query.email) {
-    requestParams.email = req.query.email
+    requestParams.email = req.query.email;
   }
 
   if (req.params.id) {
-    requestParams.id = req.params.id
+    requestParams.id = req.params.id;
   }
 
   if (req.params.project_url) {
-    requestParams.projectUrl = req.params.projectUrl
+    requestParams.projectUrl = req.params.projectUrl;
   }
 
   if (req.params.project_name) {
-    requestParams.projectName = req.params.projectName
+    requestParams.projectName = req.params.projectName;
   }
 
-  let nameLength = await getMinMaxShortName()
+  const nameLength = await getMinMaxShortName();
 
   const schema = joi.object().keys({
     id: joi.string().min(nameLength.min).max(nameLength.max).required(),
@@ -43,30 +43,29 @@ router.get('/:id/', async (req, res, next) => {
     email: joi.string().email(),
     projectName: joi.string().min(1).max(50),
     projectUrl: joi.string().min(1).max(50)
-  })
+  });
 
   // validate the user parameters
   try {
     const value = await schema.validateAsync(requestParams);
 
     if (value !== null) {
-      let licenseInfo = await getLicense(requestParams.id)
+      const licenseInfo = await getLicense(requestParams.id);
 
       // check if we return an empty object which indicates there was nothing returned from the SQL query
       if (Object.keys(licenseInfo).length === 0 && licenseInfo.constructor === Object) {
-        const err = new Error('Not Found')
-        err.status = 404
-        next(err)
+        const err = new Error('Not Found');
+        err.status = 404;
+        next(err);
       } else {
-        requestParams.licenseInfo = licenseInfo
-        res.status(200).json(placeholderReplace(requestParams))
+        requestParams.licenseInfo = licenseInfo;
+        res.status(200).json(placeholderReplace(requestParams));
       }
     }
+  } catch (err) {
+    err.status = 400;
+    next(err);
   }
-  catch (err) {
-    err.status = 400
-    next(err)
-  }
-})
+});
 
-module.exports = router
+module.exports = router;
